@@ -2,7 +2,7 @@ box:
   id: python
   username: $DOCKER_USERNAME
   password: $DOCKER_PASSWORD
-  registry: $DOCKER_REPO
+  registry: https://fra.ocir.io/v2
   ports:
     - "5000"
 
