@@ -37,7 +37,6 @@ build:
             password: $DOCKER_PASSWORD
             repository: $DOCKER_REPO
             registry: https://fra.ocir.io/v2
-
 deploy-to-kubernetes:
     box:
       id: fra.ocir.io/cloudstarscee/caneagu/python
