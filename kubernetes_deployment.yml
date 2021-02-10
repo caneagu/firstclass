@@ -19,10 +19,10 @@ spec:
     spec:
       containers:
       - name: firstclass
-        image: ${DOCKER_REPO}:${WERCKER_GIT_COMMIT}
+        image: $DOCKER_REPO:$WERCKER_GIT_COMMIT
         ports:
         - name: firstclass
           containerPort: 5000
           protocol: TCP
       imagePullSecrets:
-      - name:  ${OKE_IMAGESECRET}
+      - name:  $OKE_IMAGESECRET
