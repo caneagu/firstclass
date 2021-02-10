@@ -1,5 +1,9 @@
 box:
-  id: python:2.7-slim
+  id: fra.ocir.io/cloudstarscee/caneagu/python
+  username: $DOCKER_USERNAME
+  password: $DOCKER_PASSWORD
+  registry: https://fra.ocir.io/v2
+  tag: 2.7-slim
   ports:
     - "5000"
 
