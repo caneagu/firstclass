@@ -1,0 +1,69 @@
+#FIRSTCLASS DEMO
+box:
+  id: fra.ocir.io/cloudstarscee/caneagu/python
+  username: $DOCKER_USERNAME
+  password: $DOCKER_PASSWORD
+  registry: https://fra.ocir.io/v2
+  tag: 2.7-slim
+  ports:
+    - "5000"
+dev:
+  steps:
+    - pip-install
+    - internal/watch:
+        code: python app.py
+        reload: true
+        
+# Build definition
+build:
+  # The steps that will be executed on build
+  steps:
+    # A step that executes `pip install` command
+    - pip-install
+
+    # A custom script step, name value is used in the UI
+    # and the code value contains the command that get executed
+    - script:
+        name: python unit test
+        code: |
+          python app_test.py
+    - internal/docker-push:
+            entrypoint: app.test.py
+            cmd: 0.0.0.0 5000
+            working-dir: $WERCKER_ROOT
+            tag: $WERCKER_GIT_COMMIT
+            ports: "5000"
+            username: $DOCKER_USERNAME
+            password: $DOCKER_PASSWORD
+            repository: $DOCKER_REPO
+            registry: https://fra.ocir.io/v2
+deploy:
+    box:
+      id: fra.ocir.io/cloudstarscee/caneagu/python
+      username: $DOCKER_USERNAME
+      password: $DOCKER_PASSWORD
+      registry: https://fra.ocir.io/v2
+      tag: 2.7-slim
+      ports:
+        - "5000"
+    steps:
+    # https://github.com/wercker/step-bash-template
+    # This Wercker step will look for files in our repo with a .template extension.
+    # It will expand any environment variables in those files, then remove the
+    # template extension.
+    - bash-template
+
+    # The step above should leave us with a Kubernetes service and deployment yml files.
+    # We'll create a directory to move them to.
+    - script:
+        name: Prepare Kubernetes files
+        code: |
+          mkdir $WERCKER_OUTPUT_DIR/kubernetes
+          mv kubernetes_*.yml $WERCKER_OUTPUT_DIR/kubernetes
+    # `apply` is a good command to use here, as it'll create Kubernetes entities if they are missing.
+    - kubectl:
+        name: deploy to kubernetes
+        server: $OKE_MASTER
+        token: $OKE_TOKEN
+        insecure-skip-tls-verify: true
+        command: apply -f $WERCKER_OUTPUT_DIR/kubernetes/

@@ -1,0 +1,17 @@
+# This template file will have its environment variables expanded
+# and the .template extension removed by the bash-template Wercker step.
+# See wercker.yml.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: firstclass
+  labels:
+    app: firstclass
+spec:
+  ports:
+  - port: 80
+    targetPort: 5000
+  selector:
+    app: firstclass
+  type: LoadBalancer
