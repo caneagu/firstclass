@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: firstclass
-        image: $DOCKER_REPO:$WERCKER_GIT_COMMIT
+        image: fra.ocir.io/cloudstarscee/caneagu/firstclass:latest
         ports:
         - name: firstclass
           containerPort: 5000
