@@ -83,4 +83,4 @@ deploy:
         server: $OKE_MASTER
         token: $OKE_TOKEN
         insecure-skip-tls-verify: true
-        command: rollout status deployment/get-ip
+        command: rollout status deployment/firstclass
