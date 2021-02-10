@@ -1,7 +1,5 @@
 box:
-  id: python
-  username: $DOCKER_USERNAME
-  password: $DOCKER_PASSWORD
+  id: cloudstarscee/caneagu/firstclass:latest
   registry: https://fra.ocir.io/v2
   ports:
     - "5000"
