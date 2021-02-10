@@ -8,12 +8,10 @@ metadata:
   name: firstclass
   labels:
     app: firstclass
-    commit: ${WERCKER_GIT_COMMIT}
 spec:
   ports:
   - port: 80
     targetPort: 5000
   selector:
     app: firstclass
-    commit: ${WERCKER_GIT_COMMIT}
   type: LoadBalancer
