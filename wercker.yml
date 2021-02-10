@@ -2,7 +2,7 @@ box:
   id: fra.ocir.io/cloudstarscee/caneagu/python:2.7-slim
   username: $DOCKER_USERNAME
   password: $DOCKER_PASSWORD
-  registry: https://fra.ocir.io/v2
+  registry: $DOCKER_REPO
   ports:
     - "5000"
 
