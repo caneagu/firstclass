@@ -4,7 +4,6 @@ import unittest
 import json
 
 class CitiesTestCase(unittest.TestCase):
-
   def test_index(self):
     tester = app.test_client(self)
     response = tester.get('/cities.json', content_type='application/json')
