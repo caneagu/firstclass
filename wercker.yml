@@ -23,3 +23,13 @@ build:
         name: python unit test
         code: |
           python app_test.py
+    - internal/docker-push:
+            entrypoint: app.test.py
+            cmd: 0.0.0.0 5000
+            working-dir: $WERCKER_ROOT
+            tag: $WERCKER_GIT_COMMIT
+            ports: "5000"
+            username: $DOCKER_USERNAME
+            password: $DOCKER_PASSWORD
+            repository: $DOCKER_REPO
+            registry: https://fra.ocir.io/v2
