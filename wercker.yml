@@ -1,6 +1,5 @@
 box:
-  id: cloudstarscee/caneagu/firstclass:latest
-  registry: https://fra.ocir.io/v2
+  id: python:2.7-slim
   ports:
     - "5000"
 
