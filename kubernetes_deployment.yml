@@ -3,12 +3,10 @@
 # and the .template extension removed by the bash-template Wercker step.
 # See wercker.yml.
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: firstclass
-  labels:
-    commit: ${WERCKER_GIT_COMMIT}
 spec:
   replicas: 1
   selector:
@@ -18,13 +16,12 @@ spec:
     metadata:
       labels:
         app: firstclass
-        commit: ${WERCKER_GIT_COMMIT}
     spec:
       containers:
       - name: firstclass
         image: ${DOCKER_REPO}:${WERCKER_GIT_COMMIT}
         ports:
-        - name: get-ip-server
+        - name: firstclass
           containerPort: 5000
           protocol: TCP
       imagePullSecrets:
