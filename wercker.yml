@@ -1,5 +1,5 @@
 box:
-  id: fra.ocir.io/cloudstarscee/caneagu/python
+  id: python
   username: $DOCKER_USERNAME
   password: $DOCKER_PASSWORD
   registry: $DOCKER_REPO
